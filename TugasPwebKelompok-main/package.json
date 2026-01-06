@@ -4,12 +4,12 @@
   "description": "Backend API for E-Transport train booking application",
   "main": "src/server.js",
   "scripts": {
-    "start": "npx prisma db push && node prisma/seed.js && node src/server.js",
+    "start": "npx prisma generate && npx prisma db push && node prisma/seed.js && node src/server.js",
     "dev": "nodemon src/server.js",
     "seed": "node prisma/seed.js",
-    "postinstall": "prisma generate",
-    "db:push": "prisma db push",
-    "db:seed": "prisma db seed"
+    "postinstall": "npx prisma generate",
+    "db:push": "npx prisma db push",
+    "db:seed": "npx prisma db seed"
   },
   "keywords": [
     "express",
