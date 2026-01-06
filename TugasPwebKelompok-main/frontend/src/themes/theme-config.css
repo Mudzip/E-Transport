@@ -9,137 +9,93 @@
    ============================================ */
 
 :root {
-    /* ==========================================
-     WARNA UTAMA (PRIMARY)
-     ==========================================
-     Warna utama digunakan untuk: header, tombol utama, 
-     link, elemen interaktif, badge aktif
-  */
-    --primary-50: #f0f9ff;
-    /* Paling terang - untuk background hover */
-    --primary-100: #e0f2fe;
-    /* Untuk focus ring, background badge */
-    --primary-200: #bae6fd;
-    /* Untuk border hover */
-    --primary-300: #7dd3fc;
-    /* Untuk border aktif */
-    --primary-400: #38bdf8;
-    /* Untuk ikon, aksen ringan */
-    --primary-500: #0ea5e9;
-    /* WARNA UTAMA - tombol, header */
-    --primary-600: #0284c7;
-    /* Untuk hover state */
-    --primary-700: #0369a1;
-    /* Untuk pressed/active state */
+   /* ==========================================
+     Midnight Express Theme - Palette
+     ========================================== */
 
-    /* ==========================================
-     WARNA AKSEN (ACCENT)
-     ==========================================
-     Warna aksen digunakan untuk: harga, highlight penting,
-     call-to-action sekunder, badge promo
-  */
-    --accent-400: #fb923c;
-    /* Untuk aksen ringan */
-    --accent-500: #f97316;
-    /* WARNA AKSEN UTAMA - harga, CTA */
-    --accent-600: #ea580c;
-    /* Untuk hover state */
+   /* Primary (Electric Cyan) */
+   --primary-50: #ecfeff;
+   --primary-100: #cffafe;
+   --primary-200: #a5f3fc;
+   --primary-300: #67e8f9;
+   --primary-400: #22d3ee;
+   --primary-500: #06b6d4;
+   /* Main Brand Color */
+   --primary-600: #0891b2;
+   --primary-700: #0e7490;
+   --primary-800: #155e75;
+   --primary-900: #164e63;
+   --primary-950: #083344;
 
-    /* ==========================================
-     WARNA NETRAL (NEUTRAL/GRAY)
-     ==========================================
-     Warna netral digunakan untuk: teks, border, background,
-     separator, placeholder
-  */
-    --gray-50: #f9fafb;
-    /* Background halaman */
-    --gray-100: #f3f4f6;
-    /* Background card, section */
-    --gray-200: #e5e7eb;
-    /* Border default */
-    --gray-300: #d1d5db;
-    /* Border lebih gelap */
-    --gray-400: #9ca3af;
-    /* Placeholder, teks disabled */
-    --gray-500: #6b7280;
-    /* Teks sekunder, caption */
-    --gray-600: #4b5563;
-    /* Teks body */
-    --gray-700: #374151;
-    /* Teks body gelap */
-    --gray-800: #1f2937;
-    /* Teks heading */
-    --gray-900: #111827;
-    /* Teks paling gelap */
+   /* Accent (Vibrant Coral/Salmon) */
+   --accent-50: #fff1f2;
+   --accent-100: #ffe4e6;
+   --accent-200: #fecdd3;
+   --accent-300: #fda4af;
+   --accent-400: #fb7185;
+   --accent-500: #f43f5e;
+   /* Action/Highlight */
+   --accent-600: #e11d48;
+   --accent-700: #be123c;
+   --accent-800: #9f1239;
+   --accent-900: #881337;
 
-    /* ==========================================
-     WARNA SEMANTIK (SEMANTIC)
-     ==========================================
-     Warna untuk status dan notifikasi
-  */
-    --success: #22c55e;
-    /* Sukses, tersedia, aktif */
-    --warning: #eab308;
-    /* Peringatan, perhatian */
-    --error: #ef4444;
-    /* Error, gagal, habis */
+   /* Neutral (Deep Slate - Dark Mode Base) */
+   --gray-50: #f8fafc;
+   --gray-100: #f1f5f9;
+   --gray-200: #e2e8f0;
+   --gray-300: #cbd5e1;
+   --gray-400: #94a3b8;
+   --gray-500: #64748b;
+   --gray-600: #475569;
+   --gray-700: #334155;
+   --gray-800: #1e293b;
+   /* Cards/Surface */
+   --gray-900: #0f172a;
+   /* Body Background */
+   --gray-950: #020617;
+   /* Deepest Shadows */
 
-    /* ==========================================
-     SPACING (JARAK)
-     ==========================================
-     Jarak antar elemen, padding, margin
-  */
-    --space-1: 0.25rem;
-    /* 4px */
-    --space-2: 0.5rem;
-    /* 8px */
-    --space-3: 0.75rem;
-    /* 12px */
-    --space-4: 1rem;
-    /* 16px */
-    --space-5: 1.25rem;
-    /* 20px */
-    --space-6: 1.5rem;
-    /* 24px */
-    --space-8: 2rem;
-    /* 32px */
-    --space-10: 2.5rem;
-    /* 40px */
-    --space-12: 3rem;
-    /* 48px */
+   /* Semantic */
+   --success: #10b981;
+   --warning: #f59e0b;
+   --error: #ef4444;
+   --info: #3b82f6;
 
-    /* ==========================================
-     BORDER RADIUS (KELENGKUNGAN SUDUT)
-     ==========================================
-     Tingkat kelengkungan sudut elemen
-  */
-    --radius-sm: 0.375rem;
-    /* 6px - untuk elemen kecil */
-    --radius-md: 0.5rem;
-    /* 8px - default */
-    --radius-lg: 0.75rem;
-    /* 12px - untuk card, input */
-    --radius-xl: 1rem;
-    /* 16px - untuk card besar */
-    --radius-2xl: 1.5rem;
-    /* 24px - untuk modal, hero */
-    --radius-full: 9999px;
-    /* Bulat penuh - untuk badge, avatar */
+   /* Spacing */
+   --space-1: 0.25rem;
+   --space-2: 0.5rem;
+   --space-3: 0.75rem;
+   --space-4: 1rem;
+   --space-6: 1.5rem;
+   --space-8: 2rem;
+   --space-12: 3rem;
+   --space-16: 4rem;
+   --space-20: 5rem;
 
-    /* ==========================================
-     SHADOWS (BAYANGAN)
-     ==========================================
-     Efek bayangan untuk elevasi elemen
-  */
-    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+   /* Radius */
+   --radius-sm: 0.375rem;
+   --radius-md: 0.5rem;
+   --radius-lg: 0.75rem;
+   --radius-xl: 1rem;
+   --radius-2xl: 1.5rem;
+   --radius-full: 9999px;
 
-    /* ==========================================
-     FONT FAMILY (JENIS HURUF)
-     ==========================================
-     Ubah font-family sesuai kebutuhan
-  */
-    --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+   /* Glassmorphism & Effects */
+   --glass-surface: rgba(30, 41, 59, 0.7);
+   /* Slate 800 with opacity */
+   --glass-border: rgba(255, 255, 255, 0.08);
+   --glass-highlight: rgba(255, 255, 255, 0.15);
+   --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.36);
+   --backdrop-blur: 12px;
+
+   /* Shadows */
+   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+   --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.3), 0 2px 4px -2px rgb(0 0 0 / 0.3);
+   --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.4), 0 4px 6px -4px rgb(0 0 0 / 0.4);
+   --shadow-neon: 0 0 20px rgba(6, 182, 212, 0.3);
+
+   /* Fonts */
+   --font-heading: 'Syne', sans-serif;
+   --font-body: 'Manrope', -apple-system, sans-serif;
 }

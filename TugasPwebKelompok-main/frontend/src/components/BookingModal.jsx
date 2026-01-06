@@ -96,26 +96,26 @@ export default function BookingModal({ data, passengers, onClose, onConfirm }) {
                                     </div>
                                 </div>
 
-                                <div className="card" style={{ background: 'var(--gray-50)', padding: 'var(--space-4)' }}>
+                                <div className="card" style={{ background: 'rgba(255, 255, 255, 0.03)', padding: 'var(--space-4)' }}>
                                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                                         <div style={{ textAlign: 'center' }}>
                                             <div style={{ fontSize: '1.5rem', fontWeight: 700 }}>{formatTime(schedule.departureTime)}</div>
-                                            <div style={{ color: 'var(--gray-500)', fontSize: '0.875rem' }}>
+                                            <div style={{ color: 'var(--gray-400)', fontSize: '0.875rem' }}>
                                                 {schedule.departureStation?.name || schedule.departureStation?.code}
                                             </div>
                                         </div>
 
                                         <div style={{ flex: 1, textAlign: 'center', padding: '0 var(--space-4)' }}>
-                                            <div style={{ fontSize: '0.75rem', color: 'var(--gray-500)' }}>
+                                            <div style={{ fontSize: '0.75rem', color: 'var(--gray-400)' }}>
                                                 {calculateDuration(schedule.departureTime, schedule.arrivalTime)}
                                             </div>
-                                            <div style={{ height: '2px', background: 'var(--primary-300)', margin: 'var(--space-2) 0', borderRadius: '2px' }}></div>
-                                            <div style={{ fontSize: '0.75rem', color: 'var(--primary-600)' }}>Direct</div>
+                                            <div style={{ height: '2px', background: 'var(--primary-600)', margin: 'var(--space-2) 0', borderRadius: '2px' }}></div>
+                                            <div style={{ fontSize: '0.75rem', color: 'var(--primary-400)' }}>Direct</div>
                                         </div>
 
                                         <div style={{ textAlign: 'center' }}>
                                             <div style={{ fontSize: '1.5rem', fontWeight: 700 }}>{formatTime(schedule.arrivalTime)}</div>
-                                            <div style={{ color: 'var(--gray-500)', fontSize: '0.875rem' }}>
+                                            <div style={{ color: 'var(--gray-400)', fontSize: '0.875rem' }}>
                                                 {schedule.arrivalStation?.name || schedule.arrivalStation?.code}
                                             </div>
                                         </div>
@@ -135,7 +135,7 @@ export default function BookingModal({ data, passengers, onClose, onConfirm }) {
                                         >
                                             <div>
                                                 <div className="class-name">{cls.className}</div>
-                                                <div style={{ fontSize: '0.75rem', color: 'var(--gray-500)' }}>
+                                                <div style={{ fontSize: '0.75rem', color: 'var(--gray-400)' }}>
                                                     {cls.className === 'Eksekutif' && 'Spacious seats, AC, Meal included'}
                                                     {cls.className === 'Bisnis' && 'Comfortable seats, AC'}
                                                     {cls.className === 'Ekonomi' && 'Standard seats'}
@@ -151,15 +151,16 @@ export default function BookingModal({ data, passengers, onClose, onConfirm }) {
                             <div style={{
                                 marginTop: 'var(--space-6)',
                                 padding: 'var(--space-4)',
-                                background: 'var(--primary-50)',
-                                borderRadius: 'var(--radius-lg)'
+                                background: 'rgba(6, 182, 212, 0.1)',
+                                borderRadius: 'var(--radius-lg)',
+                                border: '1px solid rgba(6, 182, 212, 0.2)'
                             }}>
                                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 'var(--space-2)' }}>
-                                    <span style={{ color: 'var(--gray-600)' }}>{passengers} Passenger{passengers > 1 ? 's' : ''} × {formatPrice(selectedClass?.price || 0)}</span>
+                                    <span style={{ color: 'var(--gray-300)' }}>{passengers} Passenger{passengers > 1 ? 's' : ''} × {formatPrice(selectedClass?.price || 0)}</span>
                                 </div>
                                 <div style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 700, fontSize: '1.25rem' }}>
                                     <span>Total</span>
-                                    <span style={{ color: 'var(--accent-500)' }}>{formatPrice(totalPrice)}</span>
+                                    <span style={{ color: 'var(--accent-400)' }}>{formatPrice(totalPrice)}</span>
                                 </div>
                             </div>
                         </>

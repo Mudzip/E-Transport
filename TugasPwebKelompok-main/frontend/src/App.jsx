@@ -44,11 +44,7 @@ function App() {
             <span>E-Transport</span>
           </div>
           <nav style={{ display: 'flex', gap: 'var(--space-4)' }}>
-            <button className="btn btn-outline" style={{
-              background: 'rgba(255,255,255,0.1)',
-              border: '1px solid rgba(255,255,255,0.3)',
-              color: 'white'
-            }}>
+            <button className="btn btn-outline">
               My Bookings
             </button>
           </nav>
@@ -61,13 +57,15 @@ function App() {
           position: 'fixed',
           top: 'var(--space-20, 5rem)',
           right: 'var(--space-4)',
-          background: 'var(--success)',
+          background: 'rgba(16, 185, 129, 0.9)', /* var(--success) with opacity */
           color: 'white',
           padding: 'var(--space-4) var(--space-6)',
           borderRadius: 'var(--radius-lg)',
-          boxShadow: 'var(--shadow-lg)',
+          boxShadow: '0 0 20px rgba(16, 185, 129, 0.4)',
           zIndex: 1001,
-          animation: 'slideUp 0.3s ease'
+          animation: 'slideUp 0.3s ease',
+          backdropFilter: 'blur(8px)',
+          border: '1px solid rgba(255,255,255,0.2)'
         }}>
           <div style={{ fontWeight: 600, marginBottom: 'var(--space-1)' }}>✓ Booking Confirmed!</div>
           <div style={{ fontSize: '0.875rem' }}>
