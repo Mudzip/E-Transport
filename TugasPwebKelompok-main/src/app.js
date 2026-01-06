@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 
 const stationRoutes = require('./routes/stationRoutes.js');
-const scheduleRoutes = require('./routes/scheduleRoutes.js'); 
+const scheduleRoutes = require('./routes/scheduleRoutes.js');
 const trainRoutes = require('./routes/trainRoutes.js');
 const favoriteRoutes = require('./routes/favoriteRoutes.js');
 const historyRoutes = require('./routes/historyRoutes.js');
@@ -12,7 +12,27 @@ const { injectUser } = require('./middlewares/userMiddleware');
 
 
 const app = express();
-app.use(cors());
+
+// CORS Configuration - Production Ready
+const allowedOrigins = [
+  'http://localhost:5173',  // Vite dev server
+  'http://localhost:3000',  // Alternative local
+  process.env.FRONTEND_URL  // Production frontend URL
+].filter(Boolean);
+
+app.use(cors({
+  origin: function (origin, callback) {
+    // Allow requests with no origin (mobile apps, curl, etc)
+    if (!origin) return callback(null, true);
+
+    if (allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true
+}));
 app.use(express.json());
 app.use(injectUser);
 

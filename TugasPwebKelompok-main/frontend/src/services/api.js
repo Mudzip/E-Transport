@@ -1,4 +1,5 @@
-const API_BASE = 'http://localhost:3000/api';
+// Gunakan environment variable untuk production, fallback ke localhost untuk development
+const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3000/api';
 
 export async function fetchStations(type = null) {
   const url = type ? `${API_BASE}/stations?type=${type}` : `${API_BASE}/stations`;
