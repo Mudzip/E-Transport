@@ -1,0 +1,27 @@
+# Render.com Blueprint Configuration
+# https://render.com/docs/blueprint-spec
+
+services:
+  # Backend API Service
+  - type: web
+    name: e-transport-api
+    env: node
+    plan: free
+    rootDir: ./
+    buildCommand: npm install && npx prisma generate
+    startCommand: npx prisma db push && node prisma/seed.js && node src/server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: e-transport-db
+          property: connectionString
+      - key: FRONTEND_URL
+        value: https://your-frontend.vercel.app
+
+databases:
+  # PostgreSQL Database
+  - name: e-transport-db
+    plan: free
+    databaseName: etransport
