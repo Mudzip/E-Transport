@@ -13,24 +13,8 @@ const { injectUser } = require('./middlewares/userMiddleware');
 
 const app = express();
 
-// CORS Configuration - Production Ready
-const allowedOrigins = [
-  'http://localhost:5173',  // Vite dev server
-  'http://localhost:3000',  // Alternative local
-  process.env.FRONTEND_URL  // Production frontend URL
-].filter(Boolean);
-
 app.use(cors({
-  origin: function (origin, callback) {
-    // Allow requests with no origin (mobile apps, curl, etc)
-    if (!origin) return callback(null, true);
-
-    if (allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
+  origin: '*', // Allow all origins for now to prevent CORS errors without FRONTEND_URL
   credentials: true
 }));
 app.use(express.json());
