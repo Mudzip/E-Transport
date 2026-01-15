@@ -42,5 +42,11 @@ export async function createBooking(data) {
   return res.json();
 }
 
+export async function fetchUserBookings(userId) {
+  const res = await fetch(`${API_BASE}/bookings/user/${userId}`);
+  if (!res.ok) throw new Error('Failed to fetch user bookings');
+  return res.json();
+}
+
 // Alias for backward compatibility
 export const searchTrains = searchSchedules;

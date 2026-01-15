@@ -288,44 +288,70 @@ async function main() {
     return d.toISOString();
   };
 
-  // KRL (jadwal contoh - BANYAK FREKUENSI)
-  // Bogor -> Jakarta Kota
-  await makeSchedule(krlBogor, 'BOO', 'JAKK', [
-    { dep: getDate(today, '05:00'), arr: getDate(today, '06:30') },
-    { dep: getDate(today, '05:30'), arr: getDate(today, '07:00') },
-    { dep: getDate(today, '06:00'), arr: getDate(today, '07:30') },
-    { dep: getDate(today, '06:30'), arr: getDate(today, '08:00') },
-    { dep: getDate(today, '07:00'), arr: getDate(today, '08:30') },
-    { dep: getDate(today, '08:00'), arr: getDate(today, '09:30') },
-    { dep: getDate(today, '17:00'), arr: getDate(today, '18:30') }, // Pulang kerja
-  ]);
+  // Helper: Generate schedules at interval
+  async function generateIntervalSchedules(train, depCode, arrCode, startTimeStr, endTimeStr, intervalMinutes, durationMinutes) {
+    const depId = getStationId(depCode);
+    const arrId = getStationId(arrCode);
 
+    const [startHour, startMin] = startTimeStr.split(':').map(Number);
+    const [endHour, endMin] = endTimeStr.split(':').map(Number);
+
+    let currentDesc = new Date(today);
+    currentDesc.setHours(startHour, startMin, 0, 0);
+
+    const endDesc = new Date(today);
+    endDesc.setHours(endHour, endMin, 0, 0);
+
+    const schedules = [];
+
+    while (currentDesc <= endDesc) {
+      const departureTime = new Date(currentDesc);
+      const arrivalTime = new Date(currentDesc);
+      arrivalTime.setMinutes(arrivalTime.getMinutes() + durationMinutes);
+
+      schedules.push({
+        trainId: train.id,
+        departureStationId: depId,
+        arrivalStationId: arrId,
+        departureTime,
+        arrivalTime,
+      });
+
+      // Increment
+      currentDesc.setMinutes(currentDesc.getMinutes() + intervalMinutes);
+    }
+
+    if (schedules.length > 0) {
+      await prisma.schedule.createMany({ data: schedules });
+    }
+  }
+
+
+  // --- GENERATE KRL SCHEDULES (04:00 - 23:00) ---
+
+  // Bogor Line (Red) - Every 15 mins
+  // Bogor -> Jakarta Kota (approx 90 mins)
+  await generateIntervalSchedules(krlBogor, 'BOO', 'JAKK', '04:00', '23:00', 15, 90);
   // Jakarta Kota -> Bogor
-  await makeSchedule(krlBogor, 'JAKK', 'BOO', [
-    { dep: getDate(today, '06:00'), arr: getDate(today, '07:30') },
-    { dep: getDate(today, '16:00'), arr: getDate(today, '17:30') },
-    { dep: getDate(today, '17:00'), arr: getDate(today, '18:30') },
-    { dep: getDate(today, '18:00'), arr: getDate(today, '19:30') },
-    { dep: getDate(today, '19:00'), arr: getDate(today, '20:30') },
-  ]);
+  await generateIntervalSchedules(krlBogor, 'JAKK', 'BOO', '05:30', '23:30', 15, 90);
 
-  // Cikarang -> Jakarta The
-  await makeSchedule(krlCikarang, 'CKR', 'JAKK', [
-    { dep: getDate(today, '05:30'), arr: getDate(today, '07:15') },
-    { dep: getDate(today, '06:30'), arr: getDate(today, '08:15') },
-    { dep: getDate(today, '07:30'), arr: getDate(today, '09:15') },
-  ]);
+  // Cikarang Line (Blue) - Every 20 mins
+  // Cikarang -> Jakarta Kota (via Manggarai) (approx 90 mins)
+  await generateIntervalSchedules(krlCikarang, 'CKR', 'JAKK', '04:15', '22:00', 20, 90);
+  // Jakarta Kota -> Cikarang
+  await generateIntervalSchedules(krlCikarang, 'JAKK', 'CKR', '06:00', '23:45', 20, 90);
 
-  await makeSchedule(krlRangkas, 'RKS', 'TAB', [
-    { dep: getDate(today, '04:30'), arr: getDate(today, '06:30') },
-    { dep: getDate(today, '06:00'), arr: getDate(today, '08:00') },
-  ]);
+  // Rangkasbitung Line (Green) - Every 30 mins
+  // Rangkasbitung -> Tanah Abang (approx 120 mins)
+  await generateIntervalSchedules(krlRangkas, 'RKS', 'TAB', '04:00', '21:00', 30, 120);
+  // Tanah Abang -> Rangkasbitung
+  await generateIntervalSchedules(krlRangkas, 'TAB', 'RKS', '06:00', '23:00', 30, 120);
 
-  await makeSchedule(krlTangerang, 'TNG', 'DUI', [
-    { dep: getDate(today, '05:15'), arr: getDate(today, '06:15') },
-    { dep: getDate(today, '06:15'), arr: getDate(today, '07:15') },
-    { dep: getDate(today, '07:15'), arr: getDate(today, '08:15') },
-  ]);
+  // Tangerang Line (Brown) - Every 30 mins
+  // Tangerang -> Duri (approx 60 mins)
+  await generateIntervalSchedules(krlTangerang, 'TNG', 'DUI', '04:30', '22:00', 30, 60);
+  // Duri -> Tangerang
+  await generateIntervalSchedules(krlTangerang, 'DUI', 'TNG', '05:30', '23:00', 30, 60);
 
   // Intercity – masing² 2 jadwal PP
   await makeSchedule(argoParahyangan, 'BD', 'GMR', [

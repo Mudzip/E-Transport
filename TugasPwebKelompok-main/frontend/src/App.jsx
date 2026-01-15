@@ -3,6 +3,7 @@ import './index.css';
 import HomePage from './pages/HomePage';
 import ScheduleResultsPage from './pages/ScheduleResultsPage';
 import BookingModal from './components/BookingModal';
+import MyBookingsPage from './pages/MyBookingsPage';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
@@ -34,6 +35,10 @@ function App() {
     setSearchParams(null);
   };
 
+  const handleMyBookings = () => {
+    setCurrentPage('my-bookings');
+  };
+
   return (
     <div className="app">
       {/* Header */}
@@ -44,7 +49,7 @@ function App() {
             <span>E-Transport</span>
           </div>
           <nav style={{ display: 'flex', gap: 'var(--space-4)' }}>
-            <button className="btn btn-outline">
+            <button className="btn btn-outline" onClick={handleMyBookings}>
               My Bookings
             </button>
           </nav>
@@ -84,6 +89,12 @@ function App() {
           searchParams={searchParams}
           onBack={handleBackToHome}
           onSelectTrain={handleSelectTrain}
+        />
+      )}
+
+      {currentPage === 'my-bookings' && (
+        <MyBookingsPage
+          onBack={handleBackToHome}
         />
       )}
 

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { fetchTrainById } from '../services/api';
+import { fetchTrainById, createBooking } from '../services/api';
+import { useUser } from '../hooks/useUser';
 
 export default function BookingModal({ data, passengers, onClose, onConfirm }) {
     const { schedule, train: initialTrain } = data;
@@ -7,6 +8,7 @@ export default function BookingModal({ data, passengers, onClose, onConfirm }) {
     const [selectedClass, setSelectedClass] = useState(null);
     const [isBooking, setIsBooking] = useState(false);
     const [loading, setLoading] = useState(true);
+    const userId = useUser();
 
     useEffect(() => {
         // Fetch full train details including all classes
@@ -52,20 +54,32 @@ export default function BookingModal({ data, passengers, onClose, onConfirm }) {
     const totalPrice = (selectedClass?.price || 0) * passengers;
 
     const handleBook = async () => {
-        if (!selectedClass) return;
+        if (!selectedClass || !userId) return;
 
         setIsBooking(true);
 
-        // Simulate booking
-        await new Promise(resolve => setTimeout(resolve, 1500));
+        try {
+            const bookingData = {
+                userId,
+                scheduleId: schedule.id,
+                className: selectedClass.className,
+            };
 
-        onConfirm({
-            train,
-            schedule,
-            selectedClass,
-            passengers,
-            totalPrice
-        });
+            const result = await createBooking(bookingData);
+
+            onConfirm({
+                ...result.booking,
+                // Ensure these are available for UI even if backend response differs slightly
+                train: train,
+                selectedClass,
+                passengers
+            });
+        } catch (err) {
+            console.error('Booking failed:', err);
+            alert('Failed to create booking. Please try again.');
+        } finally {
+            setIsBooking(false);
+        }
     };
 
     return (

@@ -111,3 +111,32 @@ exports.getBooking = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+
+// GET /api/bookings/user/:userId
+exports.getUserBookings = async (req, res) => {
+  try {
+    const { userId } = req.params;
+
+    const bookings = await prisma.booking.findMany({
+      where: { userId },
+      include: {
+        schedule: {
+          include: {
+            train: true,
+            departureStation: true,
+            arrivalStation: true
+          }
+        },
+        payment: true
+      },
+      orderBy: {
+        createdAt: 'desc'
+      }
+    });
+
+    return res.json(bookings);
+  } catch (err) {
+    console.error('getUserBookings error:', err);
+    res.status(500).json({ error: err.message });
+  }
+};
