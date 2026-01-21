@@ -27,6 +27,7 @@ app.use('/api/favorites', favoriteRoutes);
 app.use('/api/history', historyRoutes);
 app.use('/api/bookings', bookingRoutes);
 app.use('/api/payments', paymentRoutes);
+app.use('/api/syllabus', require('./routes/syllabusRoutes.js'));
 
 
 

@@ -40,17 +40,7 @@ Buka `http://localhost:5173`
 
 ---
 
-## ☁️ Deployment Production
 
-### Railway (Backend)
-1. Push kode ke GitHub
-2. Buat project di [Railway](https://railway.app)
-3. Connect repository
-4. Tambah PostgreSQL database
-5. Set environment variables:
-   - `DATABASE_URL`: Auto dari PostgreSQL service
-   - `FRONTEND_URL`: URL frontend Vercel (nanti)
-6. Deploy otomatis saat push ke GitHub
 
 ### Vercel (Frontend)
 1. Buat project di [Vercel](https://vercel.com)
@@ -58,7 +48,7 @@ Buka `http://localhost:5173`
 3. **PENTING**: Set **Root Directory** ke `TugasPwebKelompok-main/frontend`
 4. Framework: Vite (auto-detect)
 5. Set environment variable:
-   - `VITE_API_URL`: URL Railway + `/api` (contoh: `https://e-transport-production.up.railway.app/api`)
+   - `VITE_API_URL`: URL backend + `/api` (contoh: `https://api.your-domain.com/api`)
 
 ---
 
@@ -70,4 +60,4 @@ File `prisma/schema.prisma` saat ini set ke **PostgreSQL** untuk production.
 1. Ubah sementara `provider = "postgresql"` → `provider = "sqlite"` di `schema.prisma`
 2. Atau gunakan `schema.local.prisma` yang sudah saya sediakan
 
-**PENTING**: Jangan commit perubahan ke PostgreSQL jika Railway sudah jalan!
+**PENTING**: Jangan lupa kembalikan ke PostgreSQL jika ingin deploy ke production yang menggunakan PostgreSQL!

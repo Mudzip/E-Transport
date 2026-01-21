@@ -2,12 +2,9 @@
 
 ## Langkah 1: Persiapan Backend
 
-Karena backend menggunakan Prisma + SQLite, backend **harus di-deploy terpisah** ke:
-- [Railway](https://railway.app) (Recommended)
-- [Render](https://render.com)
-- [Fly.io](https://fly.io)
+Karena backend menggunakan Prisma + SQLite, backend **harus di-deploy terpisah** ke provider yang mendukung persistent storage atau VPS.
 
-> ⚠️ **Penting**: Ubah database dari SQLite ke PostgreSQL untuk production!
+> ⚠️ **Penting**: Ubah database dari SQLite ke PostgreSQL jika ingin deploy ke platform seperti Render/Fly.io!
 
 ---
 

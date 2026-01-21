@@ -117,3 +117,26 @@ model Payment {
 
   booking Booking @relation(fields: [bookingId], references: [id])
 }
+
+// --- Features from Syllabus (PHP & MySQL) ---
+
+model VisitorCounter {
+  id    Int @id @default(autoincrement())
+  count Int @default(0)
+}
+
+model ContactMessage {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String
+  message   String
+  createdAt DateTime @default(now())
+}
+
+model GuestbookEntry {
+  id        Int      @id @default(autoincrement())
+  name      String
+  message   String
+  rating    Int      @default(5) // New: 1-5 Stars
+  createdAt DateTime @default(now())
+}
